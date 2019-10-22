@@ -9,7 +9,8 @@ For each station, the Eikonal uses a basic speed model in the ground to compute 
 The best epicenter and time is found by a complete optimisation: a L2 and L1 minimisation of the difference between the observations and the predicted arrivals of S and P waves to the stations.
 
 # Usage
-- Modify the main.f90 file to update the solver.
+- Use the Eikonal to generate the grids of speed into a `grids` folder
+- Modify the main.f90 file to update the solver
 - Run `gfortran main.f90 -o main.exe` to compile it
 - Run `./main.exe` to run it
 
