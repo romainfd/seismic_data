@@ -1,0 +1,56 @@
+gridmake.f90 pour construire les grilles des temps P et S à chaque station
+
+nx=251
+ny=211
+nz=91
+h=0.100
+
+velp(1:27,:,:)=3.
+velp(28:37,:,:)=3.4
+velp(38:47,:,:)=3.8
+velp(48:57,:,:)=4.25
+velp(58:77,:,:)=5.
+velp(78:91,:,:)=6.
+velp=h/velp  (time3d)
+vels=velp*1.75
+
+
+!Stations info from statotutm98.t ou statutm98.t
+nstat=20
+Nom station, xstat (coordstat(j,2)), ystat (coordstat(j,3)), zstat (coordstat(j,1))
+Stations TCR (l15) et Tcr (l16) 
+
+
+
+
+Dans R98in
+10 separateur entre seisme
+
+
+ie : indice event
+il : indice ligne 
+ii : indice ligne par event
+
+
+tobsp(i,1)=tobs
+tobsp(i,2)=qualite pointé entre 0 et 4 transformé en seconde <=> 1/sig ou sig incertitude
+0 <=>1 s   <=> 1 s
+1 <=>0.5 s <=> 2s
+2 <=>0.25 s <=> 4s
+3 <=>0.125 s <=> 8s
+4 <=>0 s <=> infinity
+
+q=somme des qualités (exprimées en sec)
+q2=somme des qualités (exprimées en sec) au carré
+
+d=temps origine = moyenne algebrique ??? meme tO en abs ou en L2
+
+Remise dans le systeme UTM??
+ output(ie,3)=(loczn-1)*h-2.7
+  output(ie,4)=(locxn-1)*h+352
+  output(ie,5)=(locyn-1)*h-2361
+
+output.awk => 1evt/ligne inutile ici
+
+eikplot.csh => taille des cercles = QF/40 from gmtgap
+eikresplot.csh => taille des cercles = sqrt(1/(100*$4)) from gmtgapres
